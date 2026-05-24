@@ -1,0 +1,164 @@
+/* DTT Frontend Assessment Global Styles
+   Main CSS file containing all design tokens
+   (colors, typography, spacing) as CSS variables. */
+
+/* Fonts
+   Montserrat - headings, buttons, navigation
+   Open Sans  - body text, listing information */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;1,500&family=Open+Sans:wght@400;600&display=swap');
+
+:root {
+  /* Element colors */
+
+  /* Primary red - used for buttons, active states and accents */
+  --color-primary: #eb5440;
+
+  /* Secondary dark grey - used for secondary elements */
+  --color-secondary: #4a4b4c;
+
+  /* Tertiary light grey - used for borders and dividers */
+  --color-tertiary: #e8e8e8;
+
+  /* Tertiary dark grey - used for inactive icons */
+  --color-tertiary-dark: #c3c3c3;
+
+  /* Background 1 - main page background */
+  --color-background-1: #f6f6f6;
+
+  /* Background 2 - card and component background */
+  --color-background-2: #ffffff;
+
+  /* Text colors */
+
+  /* Primary text - used for headings and important text */
+  --color-text-primary: #000000;
+
+  /* Secondary text - used for body text and descriptions */
+  --color-text-secondary: #4a4b4c;
+
+  /* Hyperlink blue - used for links */
+  --color-hyperlink: #067bc2;
+
+  /* Font families
+     Montserrat - headings, buttons, navigation (Bold, Semibold, Medium, Medium Italic)
+     Open Sans  - body text, listing information (Semibold, Regular) */
+  --font-primary: 'Montserrat', sans-serif;
+  --font-secondary: 'Open Sans', sans-serif;
+
+  /* Font weights */
+
+  /* Bold 700 - Header 1, desktop header active menu, buttons and tabs */
+  --font-weight-bold: 700;
+
+  /* Semibold 600 - back button label and input field title */
+  --font-weight-semibold: 600;
+
+  /* Medium 500 - desktop header inactive menu and empty state message */
+  --font-weight-medium: 500;
+
+  /* Regular 400 - body text and input field */
+  --font-weight-regular: 400;
+
+  /* Font sizes desktop */
+
+  /* Header 1 - Montserrat Bold */
+  --font-size-h1: 32px;
+
+  /* Header 2 - Montserrat Bold */
+  --font-size-h2: 22px;
+
+  /* Desktop header active/inactive menu, buttons, tabs and empty state - Montserrat Bold/Medium */
+  --font-size-nav: 18px;
+
+  /* Back button label - Montserrat Semibold */
+  --font-size-back: 16px;
+
+  /* Listing information - Open Sans Semibold */
+  --font-size-listing: 16px;
+
+  /* Input field title - Montserrat Semibold */
+  --font-size-input: 14px;
+
+  /* Error message - Montserrat Medium Italic */
+  --font-size-error: 14px;
+
+  /* Body text - Open Sans Regular */
+  --font-size-body: 18px;
+
+  /* Input field - Open Sans Regular */
+  --font-size-input-field: 14px;
+
+  /* Font sizes mobile */
+
+  /* Header 1 mobile */
+  --font-size-h1-mobile: 18px;
+
+  /* Header 2 mobile */
+  --font-size-h2-mobile: 14px;
+
+  /* Buttons and tabs mobile */
+  --font-size-nav-mobile: 12px;
+
+  /* Empty state message mobile */
+  --font-size-empty-mobile: 14px;
+
+  /* Listing information mobile */
+  --font-size-listing-mobile: 12px;
+
+  /* Input field title mobile */
+  --font-size-input-mobile: 12px;
+
+  /* Error message mobile */
+  --font-size-error-mobile: 12px;
+
+  /* Body text mobile */
+  --font-size-body-mobile: 12px;
+
+  /* Input field mobile */
+  --font-size-input-field-mobile: 12px;
+
+  /* Spacing */
+
+  /* Extra small - tight spacing between elements */
+  --spacing-xs: 4px;
+
+  /* Small - spacing inside components */
+  --spacing-sm: 8px;
+
+  /* Medium - spacing between components */
+  --spacing-md: 16px;
+
+  /* Large - section spacing */
+  --spacing-lg: 24px;
+
+  /* Extra large - page padding */
+  --spacing-xl: 40px;
+
+  /* Extra large - page padding */
+  --spacing-xxl: 100px;
+
+  /* Border radius */
+
+  /* Small - buttons and inputs */
+  --border-radius-sm: 4px;
+
+  /* Medium - cards */
+  --border-radius-md: 8px;
+
+  /* Large - images */
+  --border-radius-lg: 16px;
+}
+
+/* Global reset - removes default browser styles for
+   consistent appearance across all browsers */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-secondary);
+  background-color: var(--color-background-1);
+  color: var(--color-text-secondary);
+}
