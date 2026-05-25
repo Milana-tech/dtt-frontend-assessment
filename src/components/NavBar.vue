@@ -51,7 +51,7 @@
   left: 0;
   right: 0;
   z-index: 100;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 50px 1px 20px rgba(0, 0, 0, 0.1);
 }
 
 .navbar__logo {
