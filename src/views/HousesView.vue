@@ -6,7 +6,7 @@
       <RouterLink to="/house/create" class="houses-view__create-btn">
         <img
           class="house-view__add-icon"
-          src="@/assets/icons/ic_upload@3x.png"
+          src="@/assets/icons/ic_plus_white@3x.png"
           alt="Upload button"
         />
         CREATE NEW
