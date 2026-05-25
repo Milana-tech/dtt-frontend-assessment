@@ -38,6 +38,31 @@
         </div>
       </div>
     </div>
+
+    <!-- Edit and delete buttons - only visible for owned listings on hover -->
+    <div v-if="true" class="house-card__actions">
+      <!-- Edit button - navigates to edit page -->
+      <RouterLink
+        :to="`/house/${house.id}/edit`"
+        class="house-card__action-btn"
+        @click.prevent.stop
+      >
+        <img
+          src="@/assets/icons/ic_edit@3x.png"
+          alt="Edit listing"
+          class="house-card__action-icon"
+        />
+      </RouterLink>
+
+      <!-- Delete button - emits delete event to parent -->
+      <button class="house-card__action-btn" @click.prevent.stop="$emit('delete', house.id)">
+        <img
+          src="@/assets/icons/ic_delete@3x.png"
+          alt="Delete listing"
+          class="house-card__action-icon"
+        />
+      </button>
+    </div>
   </RouterLink>
 </template>
 
@@ -46,14 +71,19 @@
  * HouseCard component - displays a summary of a single house listing.
  * Used in the houses overview page to display each house in the list.
  * Clicking the card navigates to the house detail page.
+ * Edit and delete buttons are visible on hover for owned listings only.
  */
 
 defineProps({
+  // The house object containing all listing data
   house: {
     type: Object,
     required: true,
   },
 })
+
+// Emit delete event to parent component when delete button is clicked
+defineEmits(['delete'])
 </script>
 
 <style scoped>
@@ -69,10 +99,7 @@ defineProps({
   color: inherit;
   cursor: pointer;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-}
-
-.house-card:hover {
-  opacity: 0.8;
+  position: relative;
 }
 
 .house-card__image {
@@ -130,5 +157,35 @@ defineProps({
   font-family: var(--font-secondary);
   font-size: var(--font-size-listing);
   color: var(--color-text-secondary);
+}
+
+/* Edit and delete buttons are hidden by default but visible on hover */
+.house-card__actions {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  display: flex;
+  gap: var(--spacing-sm);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* Show actions when hovering over the card */
+.house-card:hover .house-card__actions {
+  opacity: 1;
+}
+
+.house-card__action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.house-card__action-icon {
+  width: 20px;
+  height: 20px;
 }
 </style>
