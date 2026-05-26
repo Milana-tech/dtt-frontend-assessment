@@ -21,18 +21,21 @@ const router = createRouter({
       name: 'house-detail',
       // Detail page for a single house listing
       component: () => import('../views/HouseDetailView.vue'),
+      meta: { activeNav: 'houses' },
     },
     {
       path: '/house/create',
       name: 'house-create',
       // Form page for creating a new house listing
       component: () => import('../views/HouseCreateView.vue'),
+      meta: { activeNav: 'houses' },
     },
     {
       path: '/house/:id/edit',
       name: 'house-edit',
       // Form page for editing an existing house listing
       component: () => import('../views/HouseEditView.vue'),
+      meta: { activeNav: 'houses' },
     },
   ],
 })
