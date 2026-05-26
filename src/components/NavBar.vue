@@ -13,7 +13,9 @@
         <RouterLink
           to="/"
           class="navbar__link"
-          :class="{ 'navbar__link--active': $route.name === 'houses' }"
+          :class="{
+            'navbar__link--active': $route.name === 'houses' || $route.meta.activeNav === 'houses',
+          }"
         >
           Houses
         </RouterLink>
