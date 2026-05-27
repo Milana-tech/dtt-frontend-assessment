@@ -35,7 +35,8 @@
 
 <script setup>
 /**
- * AboutView - displays information about DTT, the application and the developer.
+ * AboutView - displays information about DTT Real Estate
+ * and the Design and Development team.
  * This page is accessible via the About link in the navigation header.
  */
 </script>
