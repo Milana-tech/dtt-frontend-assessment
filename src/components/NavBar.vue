@@ -46,14 +46,14 @@
   align-items: center;
   gap: 70px;
   background-color: var(--color-background-2);
-  padding: 0 clamp(20px, 15%, 250px);
+  padding: 0 clamp(20px, 15%, 350px);
   height: 80px;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  box-shadow: 50px 1px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .navbar__logo {
