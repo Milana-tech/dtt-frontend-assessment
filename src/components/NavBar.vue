@@ -57,7 +57,7 @@
 }
 
 .navbar__logo {
-  height: 40px;
+  height: 50px;
 }
 
 .navbar__links {
