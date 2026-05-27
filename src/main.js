@@ -1,6 +1,11 @@
+/**
+ * main.js - Application entry point.
+ * Initializes Vue app with Pinia state management,
+ * Vue Router and global CSS variables.
+ */
+
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-
 import App from './App.vue'
 import router from './router'
 
