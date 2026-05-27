@@ -37,6 +37,12 @@ const router = createRouter({
       component: () => import('../views/HouseEditView.vue'),
       meta: { activeNav: 'houses' },
     },
+    {
+      path: '/about',
+      name: 'about',
+      // About page with information about the app and developer
+      component: () => import('../views/AboutView.vue'),
+    },
   ],
 })
 
