@@ -13,58 +13,60 @@
       </RouterLink>
     </div>
 
-    <!-- Search and sort controls -->
-    <div class="houses-view__controls">
-      <!-- Search input -->
-      <div class="houses-view__search">
-        <img
-          class="houses-view__search-icon"
-          src="@/assets/icons/ic_search@3x.png"
-          alt="Search button"
-        />
-        <input
-          v-model="searchQuery"
-          type="text"
-          placeholder="Search for a house"
-          class="houses-view__search-input"
-        />
-        <!-- Clear button - only visible when search has input -->
-        <button v-if="searchQuery" @click="searchQuery = ''" class="houses-view__search-clear">
-          X
-        </button>
+    <!-- Content wrapper with max width -->
+    <div class="houses-view__content">
+      <!-- Search and sort controls -->
+      <div class="houses-view__controls">
+        <div class="houses-view__search">
+          <img
+            class="houses-view__search-icon"
+            src="@/assets/icons/ic_search@3x.png"
+            alt="Search button"
+          />
+          <input
+            v-model="searchQuery"
+            type="text"
+            placeholder="Search for a house"
+            class="houses-view__search-input"
+          />
+          <button v-if="searchQuery" @click="searchQuery = ''" class="houses-view__search-clear">
+            X
+          </button>
+        </div>
+
+        <div class="houses-view__sort">
+          <button
+            class="houses-view__sort-btn"
+            :class="{ 'houses-view__sort-btn--active': sortBy === 'price' }"
+            @click="sortBy = 'price'"
+          >
+            Price
+          </button>
+          <button
+            class="houses-view__sort-btn"
+            :class="{ 'houses-view__sort-btn--active': sortBy === 'size' }"
+            @click="sortBy = 'size'"
+          >
+            Size
+          </button>
+        </div>
       </div>
 
-      <!-- Sort buttons -->
-      <div class="houses-view__sort">
-        <button
-          class="houses-view__sort-btn"
-          :class="{ 'houses-view__sort-btn--active': sortBy === 'price' }"
-          @click="sortBy = 'price'"
-        >
-          Price
-        </button>
-        <button
-          class="houses-view__sort-btn"
-          :class="{ 'houses-view__sort-btn--active': sortBy === 'size' }"
-          @click="sortBy = 'size'"
-        >
-          Size
-        </button>
+      <!-- Search results count -->
+      <p v-if="searchQuery" class="houses-view__results">
+        {{ filteredHouses.length }} results found
+      </p>
+
+      <!-- Empty search results state -->
+      <div v-if="filteredHouses.length === 0 && searchQuery" class="houses-view__empty">
+        <p>No results found.</p>
+        <p>Please try another keyword.</p>
       </div>
-    </div>
 
-    <!-- Search results count -->
-    <p v-if="searchQuery" class="houses-view__results">{{ filteredHouses.length }} results found</p>
-
-    <!-- Empty search results state -->
-    <div v-if="filteredHouses.length === 0 && searchQuery" class="houses-view__empty">
-      <p>No results found.</p>
-      <p>Please try another keyword.</p>
-    </div>
-
-    <!-- House listings -->
-    <div v-else class="houses-view__list">
-      <HouseCard v-for="house in filteredHouses" :key="house.id" :house="house" />
+      <!-- House listings -->
+      <div v-else class="houses-view__list">
+        <HouseCard v-for="house in filteredHouses" :key="house.id" :house="house" />
+      </div>
     </div>
   </div>
 </template>
@@ -125,14 +127,14 @@ onMounted(() => {
 
 <style scoped>
 .houses-view {
-  padding: 100px clamp(20px, 15%, 250px) var(--spacing-xl);
+  padding: clamp(80px, 10%, 120px) clamp(20px, 20%, 350px);
 }
 
 .houses-view__header {
   display: flex;
-  margin-top: 45px;
   justify-content: space-between;
   align-items: center;
+  margin-top: 45px;
   margin-bottom: var(--spacing-xl);
 }
 
@@ -173,6 +175,7 @@ onMounted(() => {
   align-items: center;
   margin-bottom: var(--spacing-lg);
   gap: var(--spacing-md);
+  max-width: 100%;
 }
 
 .houses-view__search {
@@ -183,7 +186,7 @@ onMounted(() => {
   padding: 10px 15px;
   gap: var(--spacing-sm);
   flex: 1;
-  max-width: 400px;
+  max-width: 350px;
 }
 
 .houses-view__search-input {
@@ -209,10 +212,6 @@ onMounted(() => {
   padding: 0;
   display: flex;
   align-items: center;
-}
-
-.houses-view__sort {
-  display: flex;
 }
 
 .houses-view__sort-btn {
@@ -261,7 +260,7 @@ onMounted(() => {
 .houses-view__list {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: var(--spacing-lg);
 }
 
 .houses-view__search-icon {
