@@ -2,7 +2,7 @@
   <div class="houses-view">
     <!-- Page header with title and create new listing button -->
     <div class="houses-view__header">
-      <h2 class="houses-view__title">Houses</h2>
+      <h1 class="houses-view__title">Houses</h1>
       <RouterLink to="/house/create" class="houses-view__create-btn">
         <img
           class="house-view__add-icon"
@@ -77,6 +77,7 @@
  * Includes search functionality and sorting by price or size.
  * House data is fetched from the DTT API via the Pinia store.
  */
+
 import { ref, computed, onMounted } from 'vue'
 import { useHousesStore } from '@/stores/houses'
 import HouseCard from '@/components/HouseCard.vue'
@@ -94,6 +95,7 @@ const sortBy = ref('price')
  * Filters and sorts houses based on the search query and sort option.
  * Filters by street name, city, zip code and price.
  */
+
 const filteredHouses = computed(() => {
   let houses = [...store.houses]
 
@@ -127,7 +129,7 @@ onMounted(() => {
 
 <style scoped>
 .houses-view {
-  padding: clamp(80px, 10%, 120px) clamp(20px, 20%, 350px);
+  padding: clamp(80px, 10%, 110px) clamp(20px, 20%, 350px);
 }
 
 .houses-view__header {
@@ -176,6 +178,10 @@ onMounted(() => {
   margin-bottom: var(--spacing-lg);
   gap: var(--spacing-md);
   max-width: 100%;
+}
+
+.houses-view__sort {
+  display: flex;
 }
 
 .houses-view__search {
