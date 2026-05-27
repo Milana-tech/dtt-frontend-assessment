@@ -21,7 +21,6 @@ export const useHousesStore = defineStore('houses', {
     /**
      * Returns all houses sorted by price (ascending).
      */
-
     sortedByPrice: (state) => {
       return [...state.houses].sort((a, b) => a.price - b.price)
     },
@@ -29,7 +28,6 @@ export const useHousesStore = defineStore('houses', {
     /**
      * Returns all houses sorted by size (ascending).
      */
-
     sortedBySize: (state) => {
       return [...state.houses].sort((a, b) => a.size - b.size)
     },
@@ -39,7 +37,6 @@ export const useHousesStore = defineStore('houses', {
     /**
      * Fetches all houses from the DTT API and stores them in state.
      */
-
     async fetchHouses() {
       this.isLoading = true
       this.error = null
@@ -70,7 +67,6 @@ export const useHousesStore = defineStore('houses', {
      * Fetches a single house by ID from the DTT API.
      * @param {number} id - The ID of the house to fetch.
      */
-
     async fetchHouseById(id) {
       this.isLoading = true
       this.error = null
@@ -100,7 +96,6 @@ export const useHousesStore = defineStore('houses', {
      * Deletes a house listing by ID.
      * @param {number} id - The ID of the house to delete.
      */
-
     async deleteHouse(id) {
       this.error = null
 
