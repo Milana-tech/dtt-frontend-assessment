@@ -72,6 +72,7 @@ defineProps({
   flex-direction: column;
   gap: var(--spacing-lg);
   margin-top: var(--spacing-sm);
+  width: 100%;
 }
 
 .recommended__card {
