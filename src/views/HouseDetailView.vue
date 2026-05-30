@@ -1,100 +1,116 @@
 <template>
   <div class="house-detail">
-    <!-- Back button -->
-    <RouterLink to="/" class="house-detail__back">
-      <img src="@/assets/icons/ic_back_grey@3x.png" alt="Back" class="house-detail__back-icon" />
-      <span>Back to overview</span>
-    </RouterLink>
+    <!-- Content wrapper with consistent padding -->
+    <div class="house-detail__container">
+      <!-- Go back button -->
+      <BackButton to="/" label="Back to overview" />
 
-    <!-- Loading state -->
-    <div v-if="store.isLoading" class="house-detail__loading">
-      <p>Loading...</p>
-    </div>
-
-    <!-- Error state -->
-    <div v-else-if="store.error" class="house-detail__error">
-      <p>{{ store.error }}</p>
-    </div>
-
-    <!-- House detail content -->
-    <div v-else-if="store.selectedHouse" class="house-detail__layout">
-      <!-- Left column -->
-      <div class="house-detail__left">
-        <img
-          :src="store.selectedHouse.image"
-          :alt="store.selectedHouse.location.street"
-          class="house-detail__image"
-        />
-        <div class="house-detail__card">
-          <div class="house-detail__header">
-            <h1 class="house-detail__address">
-              {{ store.selectedHouse.location.street }}
-              {{ store.selectedHouse.location.houseNumber }}
-            </h1>
-            <div v-if="store.selectedHouse.madeByMe" class="house-detail__actions">
-              <RouterLink :to="`/house/${store.selectedHouse.id}/edit`">
-                <img
-                  src="@/assets/icons/ic_edit@3x.png"
-                  alt="Edit listing"
-                  class="house-detail__action-icon"
-                />
-              </RouterLink>
-              <button @click="showDeleteModal = true" class="house-detail__action-btn">
-                <img
-                  src="@/assets/icons/ic_delete@3x.png"
-                  alt="Delete listing"
-                  class="house-detail__action-icon"
-                />
-              </button>
-            </div>
-          </div>
-          <p class="house-detail__location">
-            <img
-              src="@/assets/icons/ic_location@3x.png"
-              alt="Location"
-              class="house-detail__icon-location"
-            />
-            {{ store.selectedHouse.location.zip }} {{ store.selectedHouse.location.city }}
-          </p>
-          <div class="house-detail__details">
-            <div class="house-detail__detail">
-              <img src="@/assets/icons/ic_price@3x.png" alt="Price" class="house-detail__icon" />
-              <span>&euro; {{ store.selectedHouse.price.toLocaleString() }}</span>
-            </div>
-            <div class="house-detail__detail">
-              <img src="@/assets/icons/ic_size@3x.png" alt="Size" class="house-detail__icon" />
-              <span>{{ store.selectedHouse.size }} m<sup>2</sup></span>
-            </div>
-            <div class="house-detail__detail">
-              <img
-                src="@/assets/icons/ic_construction_date@3x.png"
-                alt="Construction year"
-                class="house-detail__icon"
-              />
-              <span>Built in {{ store.selectedHouse.constructionYear }}</span>
-            </div>
-          </div>
-          <div class="house-detail__details">
-            <div class="house-detail__detail">
-              <img src="@/assets/icons/ic_bed@3x.png" alt="Bedrooms" class="house-detail__icon" />
-              <span>{{ store.selectedHouse.rooms.bedrooms }}</span>
-            </div>
-            <div class="house-detail__detail">
-              <img src="@/assets/icons/ic_bath@3x.png" alt="Bathrooms" class="house-detail__icon" />
-              <span>{{ store.selectedHouse.rooms.bathrooms }}</span>
-            </div>
-            <div class="house-detail__detail">
-              <img src="@/assets/icons/ic_garage@3x.png" alt="Garage" class="house-detail__icon" />
-              <span>{{ store.selectedHouse.hasGarage ? 'Yes' : 'No' }}</span>
-            </div>
-          </div>
-          <p class="house-detail__description">{{ store.selectedHouse.description }}</p>
-        </div>
+      <!-- Loading state -->
+      <div v-if="store.isLoading" class="house-detail__loading">
+        <p>Loading...</p>
       </div>
 
-      <!-- Right column - recommended houses -->
-      <div class="house-detail__right">
-        <RecommendedHouses :recommended-houses="recommendedHouses" />
+      <!-- Error state -->
+      <div v-else-if="store.error" class="house-detail__error">
+        <p>{{ store.error }}</p>
+      </div>
+
+      <!-- House detail content -->
+      <div v-else-if="store.selectedHouse" class="house-detail__layout">
+        <!-- Left column -->
+        <div class="house-detail__left">
+          <img
+            :src="store.selectedHouse.image"
+            :alt="store.selectedHouse.location.street"
+            class="house-detail__image"
+          />
+          <div class="house-detail__card">
+            <div class="house-detail__header">
+              <h1 class="house-detail__address">
+                {{ store.selectedHouse.location.street }}
+                {{ store.selectedHouse.location.houseNumber }}
+              </h1>
+              <div v-if="store.selectedHouse.madeByMe" class="house-detail__actions">
+                <!-- Edit button - navigates to edit page -->
+                <RouterLink :to="`/house/${store.selectedHouse.id}/edit`">
+                  <img
+                    src="@/assets/icons/ic_edit@3x.png"
+                    alt="Edit listing"
+                    class="house-detail__action-icon"
+                  />
+                </RouterLink>
+                <!-- Delete button - opens confirmation dialog -->
+                <button @click="showDeleteModal = true" class="house-detail__action-btn">
+                  <img
+                    src="@/assets/icons/ic_delete@3x.png"
+                    alt="Delete listing"
+                    class="house-detail__action-icon"
+                  />
+                </button>
+              </div>
+            </div>
+
+            <p class="house-detail__location">
+              <img
+                src="@/assets/icons/ic_location@3x.png"
+                alt="Location"
+                class="house-detail__icon-location"
+              />
+              {{ store.selectedHouse.location.zip }} {{ store.selectedHouse.location.city }}
+            </p>
+
+            <!-- Key details row 1 - price, size, construction year -->
+            <div class="house-detail__details">
+              <div class="house-detail__detail">
+                <img src="@/assets/icons/ic_price@3x.png" alt="Price" class="house-detail__icon" />
+                <span>&euro; {{ store.selectedHouse.price.toLocaleString() }}</span>
+              </div>
+              <div class="house-detail__detail">
+                <img src="@/assets/icons/ic_size@3x.png" alt="Size" class="house-detail__icon" />
+                <span>{{ store.selectedHouse.size }} m<sup>2</sup></span>
+              </div>
+              <div class="house-detail__detail">
+                <img
+                  src="@/assets/icons/ic_construction_date@3x.png"
+                  alt="Construction year"
+                  class="house-detail__icon"
+                />
+                <span>Built in {{ store.selectedHouse.constructionYear }}</span>
+              </div>
+            </div>
+
+            <!-- Key details row 2 - bedrooms, bathrooms, garage -->
+            <div class="house-detail__details">
+              <div class="house-detail__detail">
+                <img src="@/assets/icons/ic_bed@3x.png" alt="Bedrooms" class="house-detail__icon" />
+                <span>{{ store.selectedHouse.rooms.bedrooms }}</span>
+              </div>
+              <div class="house-detail__detail">
+                <img
+                  src="@/assets/icons/ic_bath@3x.png"
+                  alt="Bathrooms"
+                  class="house-detail__icon"
+                />
+                <span>{{ store.selectedHouse.rooms.bathrooms }}</span>
+              </div>
+              <div class="house-detail__detail">
+                <img
+                  src="@/assets/icons/ic_garage@3x.png"
+                  alt="Garage"
+                  class="house-detail__icon"
+                />
+                <span>{{ store.selectedHouse.hasGarage ? 'Yes' : 'No' }}</span>
+              </div>
+            </div>
+
+            <p class="house-detail__description">{{ store.selectedHouse.description }}</p>
+          </div>
+        </div>
+
+        <!-- Right column - recommended houses -->
+        <div class="house-detail__right">
+          <RecommendedHouses :recommended-houses="recommendedHouses" />
+        </div>
       </div>
     </div>
 
@@ -131,13 +147,13 @@
  * Shows full house details including description, construction year and garage.
  * Edit and delete buttons are shown only for listings owned by the user.
  * Includes a confirmation dialog before deleting a listing.
- * Shows recommended houses in the right column based on city.
+ * Shows recommended houses in the right column based on city and price range.
  */
-
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useHousesStore } from '@/stores/houses'
 import RecommendedHouses from '@/components/RecommendedHouses.vue'
+import BackButton from '@/components/BackButton.vue'
 
 const store = useHousesStore()
 const route = useRoute()
@@ -151,7 +167,6 @@ const showDeleteModal = ref(false)
  * and similar price range (within 50% of current price).
  * Falls back to any other houses if not enough matches found.
  */
-
 const recommendedHouses = computed(() => {
   if (!store.selectedHouse || !store.houses.length) return []
 
@@ -172,7 +187,6 @@ const recommendedHouses = computed(() => {
     const others = store.houses.filter(
       (house) => house.id !== current.id && !recommended.find((r) => r.id === house.id),
     )
-
     return [...recommended, ...others].slice(0, 3)
   }
 
@@ -183,17 +197,17 @@ const recommendedHouses = computed(() => {
  * Deletes the current house listing and redirects to the overview page.
  * Called when the user confirms deletion in the modal.
  */
-
 async function handleDelete() {
   await store.deleteHouse(store.selectedHouse.id)
   showDeleteModal.value = false
+  // Redirect to houses overview after successful deletion
   router.push('/')
 }
 
 // Fetch house details and all houses when the component is mounted
 onMounted(() => {
   store.fetchHouseById(route.params.id)
-  // Always fetch all houses to make sure recommendations are available
+  // Always fetch all houses to ensure recommendations are available
   store.fetchHouses()
 })
 </script>
@@ -203,30 +217,20 @@ onMounted(() => {
   padding-top: clamp(80px, 10%, 100px);
 }
 
-.house-detail__back {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  text-decoration: none;
-  color: var(--color-text-primary);
-  font-family: var(--font-primary);
-  font-size: var(--font-size-back);
-  font-weight: var(--font-weight-semibold);
-  margin: 35px 0 40px 0;
+.house-detail__container {
   padding: 0 clamp(20px, 15%, 350px);
 }
 
-.house-detail__back-icon {
-  width: 20px;
-  height: 20px;
+.house-detail__container :deep {
+  margin: 35px 0 40px 0;
 }
 
+/* Two column layout */
 .house-detail__layout {
   display: grid;
-  grid-template-columns: 60% 25%;
+  grid-template-columns: 2fr 1fr;
   gap: var(--spacing-xxl);
-  align-items: stretch;
-  padding: 0 clamp(20px, 15%, 350px);
+  align-items: start;
 }
 
 .house-detail__actions a {
@@ -234,9 +238,15 @@ onMounted(() => {
   align-items: center;
 }
 
+/* Left column */
+.house-detail__left {
+  display: flex;
+  flex-direction: column;
+}
+
 .house-detail__image {
   width: 100%;
-  max-height: 500px;
+  max-height: 340px;
   object-fit: cover;
 }
 
@@ -306,6 +316,11 @@ onMounted(() => {
   height: 20px;
 }
 
+.house-detail__icon-location {
+  width: 17px;
+  height: 20px;
+}
+
 .house-detail__detail span {
   font-family: var(--font-secondary);
   font-size: var(--font-size-listing);
@@ -319,11 +334,7 @@ onMounted(() => {
   line-height: 1.6;
 }
 
-.house-detail__left {
-  display: flex;
-  flex-direction: column;
-}
-
+/* Right column */
 .house-detail__right {
   position: sticky;
   top: 100px;
@@ -407,10 +418,5 @@ onMounted(() => {
   flex-direction: column;
   white-space: nowrap;
   margin: 25px 20px 40px 20px;
-}
-
-.house-detail__icon-location {
-  width: 17px;
-  height: 20px;
 }
 </style>
