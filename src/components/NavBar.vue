@@ -46,7 +46,7 @@
   align-items: center;
   gap: 70px;
   background-color: var(--color-background-2);
-  padding: 0 clamp(20px, 15%, 350px);
+  padding: 0 clamp(20px, 20%, 340px);
   height: 80px;
   position: fixed;
   top: 0;
@@ -57,7 +57,7 @@
 }
 
 .navbar__logo {
-  height: 50px;
+  height: 40px;
 }
 
 .navbar__links {
