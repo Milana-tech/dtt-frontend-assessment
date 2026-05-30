@@ -1,10 +1,9 @@
 import { defineStore } from 'pinia'
 
 /**
- * Houses store manages all house listing data and API interactions.
+ * Houses store - manages all house listing data and API interactions.
  * This store is the single source of truth for house data across the application.
  */
-
 export const useHousesStore = defineStore('houses', {
   state: () => ({
     // Full list of houses fetched from the API
@@ -113,6 +112,65 @@ export const useHousesStore = defineStore('houses', {
 
         // Remove the deleted house from local state so UI updates immediately
         this.houses = this.houses.filter((house) => house.id !== id)
+      } catch (error) {
+        this.error = error.message
+      }
+    },
+
+    /**
+     * Creates a new house listing via the DTT API.
+     * @param {FormData} formData - The form data containing house details and image.
+     * @returns {Object} The newly created house object.
+     */
+    async createHouse(formData) {
+      this.error = null
+
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/houses`, {
+          method: 'POST',
+          headers: {
+            'X-Api-Key': import.meta.env.VITE_API_KEY,
+          },
+          body: formData,
+        })
+
+        if (!response.ok) {
+          throw new Error('Failed to create house')
+        }
+
+        const newHouse = await response.json()
+        // Add the new house to local state so UI updates immediately
+        this.houses.push(newHouse)
+        return newHouse
+      } catch (error) {
+        this.error = error.message
+        return null
+      }
+    },
+
+    /**
+     * Updates an existing house listing via the DTT API.
+     * @param {number} id - The ID of the house to update.
+     * @param {FormData} formData - The form data containing updated house details.
+     */
+    async updateHouse(id, formData) {
+      this.error = null
+
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/houses/${id}`, {
+          method: 'PUT',
+          headers: {
+            'X-Api-Key': import.meta.env.VITE_API_KEY,
+          },
+          body: formData,
+        })
+
+        if (!response.ok) {
+          throw new Error('Failed to update house')
+        }
+
+        // Refresh houses list to get updated data
+        await this.fetchHouses()
       } catch (error) {
         this.error = error.message
       }
