@@ -79,7 +79,7 @@
 }
 
 .about__dtt-logo {
-  height: 90px;
+  height: 70px;
 }
 
 .about__dtt-link {
