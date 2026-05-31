@@ -25,13 +25,14 @@ const router = useRouter()
 /**
  * Handles form submission from HouseForm component.
  * Updates the house listing and uploads new image if provided.
+ * Fetches updated data before redirecting to ensure detail page shows latest values.
  * @param {Object} payload - Contains formData and imageFile from HouseForm.
  */
 async function handleSubmit({ formData, imageFile }) {
-  await store.updateHouse(route.params.id, formData)
+  const id = Number(route.params.id)
 
+  await store.updateHouse(id, formData)
   if (imageFile) {
-    // Upload new image if one was selected
     const imageFormData = new FormData()
     imageFormData.append('image', imageFile)
 
@@ -44,8 +45,11 @@ async function handleSubmit({ formData, imageFile }) {
     })
   }
 
+  // Fetch updated house before redirecting so detail page shows latest data
+  await store.fetchHouseById(route.params.id)
+
   // Redirect back to the house detail page after successful update
-  router.push(`/house/${route.params.id}`)
+  await router.push(`/house/${route.params.id}`)
 }
 
 // Fetch house details when the component is mounted to pre-fill the form
