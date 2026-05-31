@@ -40,7 +40,7 @@
                   />
                 </RouterLink>
                 <!-- Delete button - opens confirmation dialog -->
-                <button @click="showDeleteModal = true" class="house-detail__action-btn">
+                <button @click="showDeleteButton = true" class="house-detail__action-btn">
                   <img
                     src="@/assets/icons/ic_delete@3x.png"
                     alt="Delete listing"
@@ -63,7 +63,7 @@
             <div class="house-detail__details">
               <div class="house-detail__detail">
                 <img src="@/assets/icons/ic_price@3x.png" alt="Price" class="house-detail__icon" />
-                <span>&euro; {{ store.selectedHouse.price.toLocaleString() }}</span>
+                <span>{{ store.selectedHouse.price.toLocaleString() }}</span>
               </div>
               <div class="house-detail__detail">
                 <img src="@/assets/icons/ic_size@3x.png" alt="Size" class="house-detail__icon" />
@@ -115,29 +115,11 @@
     </div>
 
     <!-- Delete confirmation modal -->
-    <div v-if="showDeleteModal" class="house-detail__modal-overlay">
-      <div class="house-detail__modal">
-        <h2>Delete listing</h2>
-        <div class="house-detail__paragraphs">
-          <p>Are you sure you want to delete this listing?</p>
-          <p>This action cannot be undone.</p>
-        </div>
-        <div class="house-detail__modal-buttons">
-          <button
-            @click="handleDelete"
-            class="house-detail__modal-btn house-detail__modal-btn--delete"
-          >
-            YES, DELETE
-          </button>
-          <button
-            @click="showDeleteModal = false"
-            class="house-detail__modal-btn house-detail__modal-btn--cancel"
-          >
-            GO BACK
-          </button>
-        </div>
-      </div>
-    </div>
+    <DeleteButton
+      v-if="showDeleteButton"
+      @confirm="handleDelete"
+      @cancel="showDeleteButton = false"
+    />
   </div>
 </template>
 
@@ -149,18 +131,19 @@
  * Includes a confirmation dialog before deleting a listing.
  * Shows recommended houses in the right column based on city and price range.
  */
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useHousesStore } from '@/stores/houses'
 import RecommendedHouses from '@/components/RecommendedHouses.vue'
 import BackButton from '@/components/BackButton.vue'
+import DeleteButton from '@/components/DeleteButton.vue'
 
 const store = useHousesStore()
 const route = useRoute()
 const router = useRouter()
 
 // Controls visibility of the delete confirmation modal
-const showDeleteModal = ref(false)
+const showDeleteButton = ref(false)
 
 /**
  * Returns up to 3 recommended houses based on same city
@@ -199,17 +182,27 @@ const recommendedHouses = computed(() => {
  */
 async function handleDelete() {
   await store.deleteHouse(store.selectedHouse.id)
-  showDeleteModal.value = false
+  showDeleteButton.value = false
   // Redirect to houses overview after successful deletion
-  router.push('/')
+  await router.push('/')
 }
 
 // Fetch house details and all houses when the component is mounted
 onMounted(() => {
   store.fetchHouseById(route.params.id)
-  // Always fetch all houses to ensure recommendations are available
   store.fetchHouses()
 })
+
+// Watch for route changes to reload data when navigating between houses
+watch(
+  () => route.params.id,
+  (newId) => {
+    if (newId) {
+      store.fetchHouseById(newId)
+      store.fetchHouses()
+    }
+  },
+)
 </script>
 
 <style scoped>
@@ -217,11 +210,12 @@ onMounted(() => {
   padding-top: clamp(80px, 10%, 100px);
 }
 
+/* Content wrapper that controls padding for all child elements */
 .house-detail__container {
   padding: 0 clamp(20px, 15%, 350px);
 }
 
-.house-detail__container :deep {
+.house-detail__container :deep(.back-button) {
   margin: 35px 0 40px 0;
 }
 
@@ -233,6 +227,7 @@ onMounted(() => {
   align-items: start;
 }
 
+/* Edit button link - removes default link styling */
 .house-detail__actions a {
   display: flex;
   align-items: center;
@@ -250,6 +245,7 @@ onMounted(() => {
   object-fit: cover;
 }
 
+/* White info card */
 .house-detail__card {
   background-color: var(--color-background-2);
   padding: var(--spacing-xl);
@@ -285,8 +281,8 @@ onMounted(() => {
 }
 
 .house-detail__action-icon {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
 }
 
 .house-detail__location {
@@ -340,83 +336,11 @@ onMounted(() => {
   top: 100px;
 }
 
-.house-detail__modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 200;
-}
-
-.house-detail__modal {
-  background-color: var(--color-background-2);
-  border-radius: var(--border-radius-lg);
-  padding: 40px 100px;
-  max-width: 600px;
-  width: 90%;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.house-detail__modal h2 {
-  font-family: var(--font-primary);
-  font-size: var(--font-size-h2);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-primary);
-}
-
-.house-detail__modal p {
-  font-family: var(--font-secondary);
-  font-size: var(--font-size-body);
-  color: var(--color-text-secondary);
-}
-
-.house-detail__modal-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-  margin-top: var(--spacing-md);
-}
-
-.house-detail__modal-btn {
-  padding: var(--spacing-md) var(--spacing-xl);
-  border: none;
-  border-radius: var(--border-radius-md);
-  cursor: pointer;
-  font-family: var(--font-primary);
-  font-size: var(--font-size-nav);
-  font-weight: var(--font-weight-bold);
-}
-
-.house-detail__modal-btn--delete {
-  background-color: var(--color-primary);
-  color: var(--color-background-2);
-}
-
-.house-detail__modal-btn--cancel {
-  background-color: var(--color-text-secondary);
-  color: var(--color-background-2);
-}
-
 .house-detail__loading,
 .house-detail__error {
   text-align: center;
   font-family: var(--font-secondary);
   color: var(--color-text-secondary);
   margin-top: var(--spacing-xl);
-}
-
-.house-detail__paragraphs {
-  display: flex;
-  flex-direction: column;
-  white-space: nowrap;
-  margin: 25px 20px 40px 20px;
 }
 </style>
