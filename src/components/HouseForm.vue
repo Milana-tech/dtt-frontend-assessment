@@ -485,6 +485,11 @@ function handleSubmit() {
   overflow: hidden;
 }
 
+.house-form__submit:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+
 .house-form__image-upload--error {
   border-color: var(--color-primary);
 }
@@ -510,7 +515,7 @@ function handleSubmit() {
   position: absolute;
   top: var(--spacing-xs);
   right: var(--spacing-xs);
-  background: var(--color-primary);
+  background: rgba(0, 0, 0, 0.1);
   border: none;
   border-radius: 50%;
   width: 24px;
@@ -518,12 +523,12 @@ function handleSubmit() {
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .house-form__image-clear img {
-  width: 12px;
-  height: 12px;
+  width: 30px;
+  height: 30px;
 }
 
 .house-form__image-input {
@@ -564,5 +569,9 @@ function handleSubmit() {
 .house-form__button-flex {
   display: flex;
   justify-content: flex-end;
+}
+
+.house-form__image-upload:has(.house-form__image-preview) {
+  border: none;
 }
 </style>
