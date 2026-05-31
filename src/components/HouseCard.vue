@@ -2,7 +2,7 @@
   <!-- The clickable house card that navigates to the house detail page -->
   <RouterLink :to="`/house/${house.id}`" class="house-card">
     <!-- House image -->
-    <img :src="house.image" :alt="house.streetName" class="house-card__image" />
+    <img :src="house.image" :alt="house.location.street" class="house-card__image" />
 
     <!-- House information -->
     <div class="house-card__info">
@@ -40,7 +40,7 @@
     </div>
 
     <!-- Edit and delete buttons - only visible for owned listings on hover -->
-    <div v-if="true" class="house-card__actions">
+    <div v-if="house.madeByMe" class="house-card__actions">
       <!-- Edit button - navigates to edit page -->
       <RouterLink
         :to="`/house/${house.id}/edit`"
@@ -165,7 +165,7 @@ defineEmits(['delete'])
   top: var(--spacing-md);
   right: var(--spacing-md);
   display: flex;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-md);
   opacity: 0;
   transition: opacity 0.2s ease;
 }
@@ -187,5 +187,10 @@ defineEmits(['delete'])
 .house-card__action-icon {
   width: 20px;
   height: 20px;
+}
+
+.house-card:hover {
+  opacity: 0.9;
+  cursor: pointer;
 }
 </style>
