@@ -65,9 +65,21 @@
 
       <!-- House listings -->
       <div v-else class="houses-view__list">
-        <HouseCard v-for="house in filteredHouses" :key="house.id" :house="house" />
+        <HouseCard
+          v-for="house in filteredHouses"
+          :key="house.id"
+          :house="house"
+          @delete="handleDelete"
+        />
       </div>
     </div>
+
+    <!-- Delete confirmation modal -->
+    <DeleteModal
+      v-if="showDeleteModal"
+      @confirm="confirmDelete"
+      @cancel="showDeleteModal = false"
+    />
   </div>
 </template>
 
@@ -77,10 +89,10 @@
  * Includes search functionality and sorting by price or size.
  * House data is fetched from the DTT API via the Pinia store.
  */
-
 import { ref, computed, onMounted } from 'vue'
 import { useHousesStore } from '@/stores/houses'
 import HouseCard from '@/components/HouseCard.vue'
+import DeleteModal from '@/components/DeleteButton.vue'
 
 // Access the houses store
 const store = useHousesStore()
@@ -91,11 +103,16 @@ const searchQuery = ref('')
 // Current sort option - either 'price' or 'size'
 const sortBy = ref('price')
 
+// Controls visibility of the delete confirmation modal
+const showDeleteModal = ref(false)
+
+// ID of the house to be deleted
+const houseToDelete = ref(null)
+
 /**
  * Filters and sorts houses based on the search query and sort option.
  * Filters by street name, city, zip code and price.
  */
-
 const filteredHouses = computed(() => {
   let houses = [...store.houses]
 
@@ -125,6 +142,26 @@ const filteredHouses = computed(() => {
 onMounted(() => {
   store.fetchHouses()
 })
+
+/**
+ * Handles delete event from HouseCard component.
+ * Opens confirmation modal before permanently deleting the listing.
+ * @param {number} id - The ID of the house to delete.
+ */
+function handleDelete(id) {
+  houseToDelete.value = id
+  showDeleteModal.value = true
+}
+
+/**
+ * Confirms deletion of the house listing.
+ * Called when user clicks YES DELETE in the confirmation modal.
+ */
+async function confirmDelete() {
+  await store.deleteHouse(houseToDelete.value)
+  showDeleteModal.value = false
+  houseToDelete.value = null
+}
 </script>
 
 <style scoped>
@@ -273,5 +310,10 @@ onMounted(() => {
   margin-right: 10px;
   width: 16px;
   height: 16px;
+}
+
+.houses-view__sort-btn:hover {
+  opacity: 0.85;
+  cursor: pointer;
 }
 </style>
