@@ -80,4 +80,9 @@
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
 }
+
+.navbar__link:hover {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+}
 </style>
