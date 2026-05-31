@@ -54,10 +54,8 @@ export const useHousesStore = defineStore('houses', {
         // Store the fetched houses in state
         this.houses = await response.json()
       } catch (error) {
-        // Store the error message for display in the UI
         this.error = error.message
       } finally {
-        // Always stop loading whether the request succeeded or failed
         this.isLoading = false
       }
     },
@@ -158,7 +156,7 @@ export const useHousesStore = defineStore('houses', {
 
       try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/houses/${id}`, {
-          method: 'PUT',
+          method: 'POST',
           headers: {
             'X-Api-Key': import.meta.env.VITE_API_KEY,
           },
@@ -169,8 +167,8 @@ export const useHousesStore = defineStore('houses', {
           throw new Error('Failed to update house')
         }
 
-        // Refresh houses list to get updated data
         await this.fetchHouses()
+        await this.fetchHouseById(id)
       } catch (error) {
         this.error = error.message
       }
