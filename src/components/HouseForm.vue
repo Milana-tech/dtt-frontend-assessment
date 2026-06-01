@@ -12,7 +12,6 @@
         :class="{ 'house-form__input--error': errors.streetName }"
       />
       <p v-if="errors.streetName" class="house-form__error">
-        <img src="@/assets/icons/ic_clear@3x.png" alt="Error" class="house-form__error-icon" />
         {{ errors.streetName }}
       </p>
     </div>
@@ -29,7 +28,6 @@
           :class="{ 'house-form__input--error': errors.houseNumber }"
         />
         <p v-if="errors.houseNumber" class="house-form__error">
-          <img src="@/assets/icons/ic_clear@3x.png" alt="Error" class="house-form__error-icon" />
           {{ errors.houseNumber }}
         </p>
       </div>
@@ -56,7 +54,6 @@
         :class="{ 'house-form__input--error': errors.zip }"
       />
       <p v-if="errors.zip" class="house-form__error">
-        <img src="@/assets/icons/ic_clear@3x.png" alt="Error" class="house-form__error-icon" />
         {{ errors.zip }}
       </p>
     </div>
@@ -72,7 +69,6 @@
         :class="{ 'house-form__input--error': errors.city }"
       />
       <p v-if="errors.city" class="house-form__error">
-        <img src="@/assets/icons/ic_clear@3x.png" alt="Error" class="house-form__error-icon" />
         {{ errors.city }}
       </p>
     </div>
@@ -118,7 +114,6 @@
         @change="handleImageChange"
       />
       <p v-if="errors.image" class="house-form__error">
-        <img src="@/assets/icons/ic_clear@3x.png" alt="Error" class="house-form__error-icon" />
         {{ errors.image }}
       </p>
     </div>
@@ -134,7 +129,6 @@
         :class="{ 'house-form__input--error': errors.price }"
       />
       <p v-if="errors.price" class="house-form__error">
-        <img src="@/assets/icons/ic_clear@3x.png" alt="Error" class="house-form__error-icon" />
         {{ errors.price }}
       </p>
     </div>
@@ -151,7 +145,6 @@
           :class="{ 'house-form__input--error': errors.size }"
         />
         <p v-if="errors.size" class="house-form__error">
-          <img src="@/assets/icons/ic_clear@3x.png" alt="Error" class="house-form__error-icon" />
           {{ errors.size }}
         </p>
       </div>
@@ -168,7 +161,6 @@
           <option value="false">No</option>
         </select>
         <p v-if="errors.hasGarage" class="house-form__error">
-          <img src="@/assets/icons/ic_clear@3x.png" alt="Error" class="house-form__error-icon" />
           {{ errors.hasGarage }}
         </p>
       </div>
@@ -186,7 +178,6 @@
           :class="{ 'house-form__input--error': errors.bedrooms }"
         />
         <p v-if="errors.bedrooms" class="house-form__error">
-          <img src="@/assets/icons/ic_clear@3x.png" alt="Error" class="house-form__error-icon" />
           {{ errors.bedrooms }}
         </p>
       </div>
@@ -201,7 +192,6 @@
           :class="{ 'house-form__input--error': errors.bathrooms }"
         />
         <p v-if="errors.bathrooms" class="house-form__error">
-          <img src="@/assets/icons/ic_clear@3x.png" alt="Error" class="house-form__error-icon" />
           {{ errors.bathrooms }}
         </p>
       </div>
@@ -218,7 +208,6 @@
         :class="{ 'house-form__input--error': errors.constructionYear }"
       />
       <p v-if="errors.constructionYear" class="house-form__error">
-        <img src="@/assets/icons/ic_clear@3x.png" alt="Error" class="house-form__error-icon" />
         {{ errors.constructionYear }}
       </p>
     </div>
@@ -228,12 +217,11 @@
       <label class="house-form__label">Description*</label>
       <textarea
         v-model="form.description"
-        placeholder="Enter description"
+        placeholder="Description"
         class="house-form__input house-form__textarea"
         :class="{ 'house-form__input--error': errors.description }"
       />
       <p v-if="errors.description" class="house-form__error">
-        <img src="@/assets/icons/ic_clear@3x.png" alt="Error" class="house-form__error-icon" />
         {{ errors.description }}
       </p>
     </div>
@@ -543,11 +531,6 @@ function handleSubmit() {
   font-size: var(--font-size-error);
   font-style: italic;
   color: var(--color-primary);
-}
-
-.house-form__error-icon {
-  width: 14px;
-  height: 14px;
 }
 
 .house-form__submit {
