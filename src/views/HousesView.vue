@@ -30,7 +30,11 @@
             class="houses-view__search-input"
           />
           <button v-if="searchQuery" @click="searchQuery = ''" class="houses-view__search-clear">
-            X
+            <img
+              class="houses-view__search-clear"
+              src="@/assets/icons/ic_clear@3x.png"
+              alt="Remove button"
+            />
           </button>
         </div>
 
@@ -59,6 +63,11 @@
 
       <!-- Empty search results state -->
       <div v-if="filteredHouses.length === 0 && searchQuery" class="houses-view__empty">
+        <img
+          src="@/assets/images/img_empty_houses@3x.png"
+          alt="No results"
+          class="houses-view__empty-image"
+        />
         <p>No results found.</p>
         <p>Please try another keyword.</p>
       </div>
@@ -250,6 +259,8 @@ async function confirmDelete() {
   background: none;
   border: none;
   cursor: pointer;
+  width: 16px;
+  height: 16px;
   color: var(--color-tertiary-dark);
   font-size: var(--font-size-input);
   padding: 0;
@@ -315,5 +326,11 @@ async function confirmDelete() {
 .houses-view__sort-btn:hover {
   opacity: 0.85;
   cursor: pointer;
+}
+
+.houses-view__empty-image {
+  width: 270px;
+  height: auto;
+  margin-bottom: var(--spacing-md);
 }
 </style>
