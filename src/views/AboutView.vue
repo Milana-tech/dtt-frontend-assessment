@@ -1,16 +1,17 @@
 <template>
   <div class="about">
+    <!-- Page title - only visible on mobile -->
+    <h1 class="about__page-title">About</h1>
+
     <div class="about__content">
       <!-- About DTT section -->
       <div class="about__section">
-        <h1 class="about__title">About DTT Real Estate</h1>
+        <h2 class="about__title">About DTT Real Estate</h2>
         <p class="about__text">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet consectetur dolore dolores,
           eveniet exercitationem, expedita illum ipsa iure necessitatibus, nesciunt nisi optio quam
           quisquam quo rem repudiandae sunt temporibus ut? Lorem ipsum dolor sit amet, consectetur
-          adipisicing elit. Dolor dolores eveniet laborum modi neque odio quis sequi? Dolorem eos
-          est ex harum impedit, ipsam ipsum minus, quasi, quibusdam tempora totam. Lorem ipsum dolor
-          sit amet, consectetur adipisicing elit. Blanditiis commodi culpa dolore in.
+          adipisicing elit. Dolor dolores eveniet laborum modi neque odio q
         </p>
         <p class="about__text about__text--spaced">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi cumque cupiditate
@@ -20,7 +21,7 @@
 
       <!-- Design and Development section -->
       <div class="about__section">
-        <h1 class="about__title">Design and Development</h1>
+        <h2 class="about__subtitle">Design and Development</h2>
         <div class="about__dtt">
           <img src="@/assets/images/img_logo_dtt@3x.png" alt="DTT Logo" class="about__dtt-logo" />
           <div class="about__dtt-info">
@@ -101,6 +102,13 @@
   gap: 60px;
 }
 
+.about__subtitle {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
 .about__text {
   font-family: var(--font-secondary);
   font-size: var(--font-size-body);
@@ -111,5 +119,63 @@
 
 .about__text--spaced {
   margin-top: var(--spacing-md);
+}
+
+.about__page-title {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .about {
+    padding: clamp(16px, 3%, 20px) clamp(16px, 5%, 20px);
+  }
+
+  .about__page-title {
+    display: block;
+    text-align: center;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h1-mobile);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .about__title {
+    font-size: var(--font-size-h1-mobile);
+  }
+
+  .about__content {
+    max-width: 100%;
+    padding-top: var(--spacing-md);
+  }
+
+  .about__subtitle {
+    font-size: var(--font-size-h1-mobile);
+  }
+
+  .about__dtt-logo {
+    height: 40px;
+  }
+
+  .about__dtt {
+    margin-top: 10px;
+  }
+
+  .about__dtt-name {
+    font-size: var(--font-size-body-mobile);
+  }
+
+  .about__dtt-link {
+    font-size: var(--font-size-body-mobile);
+  }
+
+  .about__text {
+    font-size: var(--font-size-body-mobile);
+    padding-top: 10px;
+  }
+
+  .about__text--spaced {
+    margin-top: 0;
+  }
 }
 </style>
