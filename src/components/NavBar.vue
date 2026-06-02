@@ -1,15 +1,13 @@
 <template>
   <!-- Fixed navigation header displayed on all pages -->
   <nav class="navbar">
-    <!-- DTT logo that navigates to the houses overview page -->
-    <RouterLink to="/">
+    <!-- Desktop: DTT logo and text links -->
+    <RouterLink to="/" class="navbar__logo-link">
       <img src="@/assets/images/img_logo_dtt@3x.png" alt="DTT Logo" class="navbar__logo" />
     </RouterLink>
 
-    <!-- Navigation links -->
     <ul class="navbar__links">
       <li>
-        <!-- RouterLink automatically gets active class when route matches -->
         <RouterLink
           to="/"
           class="navbar__link"
@@ -30,6 +28,35 @@
         </RouterLink>
       </li>
     </ul>
+
+    <!-- Mobile: icon links -->
+    <div class="navbar__mobile">
+      <RouterLink
+        to="/"
+        class="navbar__mobile-link"
+        :class="{
+          'navbar__mobile-link--active':
+            $route.name === 'houses' || $route.meta.activeNav === 'houses',
+        }"
+      >
+        <img
+          src="@/assets/icons/ic_mobile_navigarion_home_active@3x.png"
+          alt="Houses"
+          class="navbar__mobile-icon"
+        />
+      </RouterLink>
+      <RouterLink
+        to="/about"
+        class="navbar__mobile-link"
+        :class="{ 'navbar__mobile-link--active': $route.name === 'about' }"
+      >
+        <img
+          src="@/assets/icons/ic_mobile_navigarion_info_active@3x.png"
+          alt="About"
+          class="navbar__mobile-icon"
+        />
+      </RouterLink>
+    </div>
   </nav>
 </template>
 
@@ -84,5 +111,46 @@
 .navbar__link:hover {
   color: var(--color-text-primary);
   font-weight: var(--font-weight-bold);
+}
+
+.navbar__mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    top: auto;
+    bottom: 0;
+    height: 60px;
+    padding: 0 var(--spacing-md);
+    gap: 0;
+    justify-content: center;
+  }
+
+  .navbar__logo-link {
+    display: none;
+  }
+
+  .navbar__links {
+    display: none;
+  }
+
+  .navbar__mobile {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .navbar__mobile-icon {
+    width: 24px;
+    height: 24px;
+    opacity: 0.5;
+  }
+
+  .navbar__mobile-link--active .navbar__mobile-icon {
+    opacity: 1;
+  }
 }
 </style>
