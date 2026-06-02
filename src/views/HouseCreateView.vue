@@ -1,7 +1,9 @@
 <template>
   <div class="house-create">
-    <BackButton to="/" label="Back to overview" />
-    <h1 class="house-create__title">Create new listing</h1>
+    <div class="house-create__header">
+      <BackButton to="/" label="" />
+      <h1 class="house-create__title">Create new listing</h1>
+    </div>
     <HouseForm submit-label="POST" @submit="handleSubmit" />
   </div>
 </template>
@@ -70,14 +72,34 @@ async function handleSubmit({ formData, imageFile }) {
   margin-bottom: var(--spacing-xl);
 }
 
+.house-create__header {
+  display: flex;
+  align-items: center;
+}
+
 @media (max-width: 768px) {
   .house-create {
     background-image: none;
     padding: clamp(80px, 10%, 100px) var(--spacing-md);
   }
 
+  .house-create__header {
+    justify-content: center;
+    position: relative;
+    margin-bottom: var(--spacing-xl);
+  }
+
   .house-create__title {
-    margin-top: var(--spacing-md);
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+    font-size: var(--font-size-h2);
+  }
+
+  .house-create :deep(.back-button) {
+    position: absolute;
+    left: 0;
+    margin: 0;
   }
 }
 </style>
