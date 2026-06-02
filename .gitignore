@@ -16,8 +16,6 @@ coverage
 
 .env
 
-screenshots/
-
 # Editor directories and files
 .vscode/*
 .vscode
