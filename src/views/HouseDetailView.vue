@@ -24,14 +24,33 @@
             :alt="store.selectedHouse.location.street"
             class="house-detail__image"
           />
+
+          <!-- Edit/delete buttons overlay on image - mobile only -->
+          <div v-if="store.selectedHouse.madeByMe" class="house-detail__image-actions">
+            <RouterLink :to="`/house/${store.selectedHouse.id}/edit`">
+              <img
+                src="@/assets/icons/ic_edit_white@3x.png"
+                alt="Edit listing"
+                class="house-detail__action-icon"
+              />
+            </RouterLink>
+            <button @click="showDeleteButton = true" class="house-detail__action-btn">
+              <img
+                src="@/assets/icons/ic_delete_white@3x.png"
+                alt="Delete listing"
+                class="house-detail__action-icon"
+              />
+            </button>
+          </div>
+
           <div class="house-detail__card">
             <div class="house-detail__header">
               <h1 class="house-detail__address">
                 {{ store.selectedHouse.location.street }}
                 {{ store.selectedHouse.location.houseNumber }}
               </h1>
+              <!-- Edit/delete buttons - desktop only -->
               <div v-if="store.selectedHouse.madeByMe" class="house-detail__actions">
-                <!-- Edit button - navigates to edit page -->
                 <RouterLink :to="`/house/${store.selectedHouse.id}/edit`">
                   <img
                     src="@/assets/icons/ic_edit@3x.png"
@@ -39,7 +58,6 @@
                     class="house-detail__action-icon"
                   />
                 </RouterLink>
-                <!-- Delete button - opens confirmation dialog -->
                 <button @click="showDeleteButton = true" class="house-detail__action-btn">
                   <img
                     src="@/assets/icons/ic_delete@3x.png"
@@ -155,17 +173,13 @@ const recommendedHouses = computed(() => {
 
   const current = store.selectedHouse
 
-  // Filter by same city AND similar price range (within 50% of current price)
   const recommended = store.houses.filter((house) => {
     if (house.id === current.id) return false
-
     const sameCity = house.location.city === current.location.city
     const similarPrice = house.price >= current.price * 0.5 && house.price <= current.price * 1.5
-
     return sameCity || similarPrice
   })
 
-  // If not enough results, fill with any other houses
   if (recommended.length < 3) {
     const others = store.houses.filter(
       (house) => house.id !== current.id && !recommended.find((r) => r.id === house.id),
@@ -183,7 +197,6 @@ const recommendedHouses = computed(() => {
 async function handleDelete() {
   await store.deleteHouse(store.selectedHouse.id)
   showDeleteButton.value = false
-  // Redirect to houses overview after successful deletion
   await router.push('/')
 }
 
@@ -243,6 +256,10 @@ watch(
   width: 100%;
   max-height: 340px;
   object-fit: cover;
+}
+
+.house-detail__image-actions {
+  display: none;
 }
 
 /* White info card */
@@ -342,5 +359,90 @@ watch(
   font-family: var(--font-secondary);
   color: var(--color-text-secondary);
   margin-top: var(--spacing-xl);
+}
+
+@media (max-width: 768px) {
+  .house-detail {
+    padding-top: 0;
+  }
+
+  .house-detail__container {
+    padding: 0;
+  }
+
+  .house-detail__container :deep(.back-button) {
+    position: absolute;
+    top: var(--spacing-lg);
+    left: var(--spacing-md);
+    z-index: 10;
+    margin: 0;
+    color: var(--color-background-2);
+  }
+
+  .house-detail__container :deep(.back-button) img {
+    filter: brightness(10);
+  }
+
+  .house-detail__container :deep(.back-button) span {
+    display: none;
+  }
+
+  .house-detail__layout {
+    grid-template-columns: 1fr;
+    gap: 0;
+    position: relative;
+  }
+
+  .house-detail__left {
+    position: relative;
+  }
+
+  .house-detail__image {
+    max-height: 300px;
+    width: 100%;
+  }
+
+  .house-detail__image-actions {
+    display: flex;
+    position: absolute;
+    top: var(--spacing-lg);
+    right: var(--spacing-md);
+    gap: var(--spacing-md);
+    z-index: 10;
+  }
+
+  .house-detail__image-actions a {
+    display: flex;
+    align-items: center;
+  }
+
+  .house-detail__image-actions .house-detail__action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 20px;
+  }
+
+  .house-detail__actions {
+    display: none;
+  }
+
+  .house-detail__card {
+    border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+    margin-top: -20px;
+    position: relative;
+    padding: var(--spacing-xl) var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .house-detail__detail span {
+    white-space: nowrap;
+  }
+
+  .house-detail__right {
+    position: static;
+    padding: 0 var(--spacing-md) 80px;
+  }
 }
 </style>
