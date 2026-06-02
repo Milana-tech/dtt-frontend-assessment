@@ -1,44 +1,67 @@
-# dtt-frontend-assessment
+# DTT Real Estate
 
-This template should help get you started developing with Vue 3 in Vite.
+A house listing web application.
 
-## Recommended IDE Setup
+## Tech Stack
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Vue 3
+- Vite
+- Pinia
+- Vue Router
+- ESLint
+- Prettier
 
-## Recommended Browser Setup
+## Features
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
+- View all house listings from the DTT API
+- Search houses by street, city, zip code or price
+- Sort houses by price or size
+- View detailed information about a house
+- Create, edit and delete your own listings
+- Recommended houses on the detail page
+- About page with DTT information
+- Mobile responsive design
 
 ## Project Setup
 
-```sh
+### Prerequisites
+
+- Node.js
+- npm
+
+### Installation
+
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Run Development Server
 
-```sh
+```bash
 npm run dev
 ```
 
-### Compile and Minify for Production
+The app runs on `http://localhost:8080`
 
-```sh
+### Build for Production
+
+```bash
 npm run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+### Lint
 
-```sh
+```bash
 npm run lint
 ```
+
+### Format
+
+```bash
+npm run format
+```
+
+## API
+
+This project uses the DTT House API. An API key is required to access the endpoints.
+
