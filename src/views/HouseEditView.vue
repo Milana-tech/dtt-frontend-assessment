@@ -77,13 +77,12 @@ onMounted(() => {
   font-size: var(--font-size-h1);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
-  margin-top: 45px;
   margin-bottom: var(--spacing-xl);
 }
 
 .house-edit__header {
   display: flex;
-  align-items: center;
+  flex-direction: column;
 }
 
 @media (max-width: 768px) {
