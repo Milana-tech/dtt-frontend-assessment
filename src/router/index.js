@@ -12,6 +12,10 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      redirect: '/houses', // Redirect root path to the houses overview page
+    },
+    {
+      path: '/houses',
       name: 'houses',
       // Houses overview page is the main landing page of the application
       component: () => import('../views/HousesView.vue'),

@@ -9,7 +9,7 @@
     <ul class="navbar__links">
       <li>
         <RouterLink
-          to="/"
+          to="/houses"
           class="navbar__link"
           :class="{
             'navbar__link--active': $route.name === 'houses' || $route.meta.activeNav === 'houses',
@@ -32,7 +32,7 @@
     <!-- Mobile: icon links -->
     <div class="navbar__mobile">
       <RouterLink
-        to="/"
+        to="/houses"
         class="navbar__mobile-link"
         :class="{
           'navbar__mobile-link--active':
