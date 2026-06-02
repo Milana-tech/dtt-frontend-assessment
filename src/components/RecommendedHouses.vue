@@ -147,4 +147,25 @@ defineProps({
   font-size: var(--font-size-input);
   color: var(--color-text-secondary);
 }
+
+@media (max-width: 768px) {
+  .recommended {
+    padding: 0 var(--spacing-md);
+    padding-bottom: 80px;
+  }
+
+  .recommended__image {
+    width: 80px;
+    height: 80px;
+    min-width: 80px;
+  }
+
+  .recommended__detail span {
+    white-space: nowrap;
+  }
+
+  .recommended__title {
+    font-size: var(--font-size-h1-mobile);
+  }
+}
 </style>
