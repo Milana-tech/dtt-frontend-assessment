@@ -557,4 +557,28 @@ function handleSubmit() {
 .house-form__image-upload:has(.house-form__image-preview) {
   border: none;
 }
+
+@media (max-width: 768px) {
+  .house-form__form {
+    max-width: 100%;
+  }
+
+  .house-form__row {
+    flex-direction: column;
+  }
+
+  .house-form__submit {
+    width: 100%;
+    align-self: stretch;
+  }
+
+  .house-form__row:nth-child(2) {
+    flex-direction: row;
+  }
+
+  .house-form__submit {
+    width: 100%;
+    align-self: stretch;
+  }
+}
 </style>
