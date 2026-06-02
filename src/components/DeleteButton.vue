@@ -104,4 +104,31 @@ defineEmits(['confirm', 'cancel'])
   background-color: var(--color-text-secondary);
   color: var(--color-background-2);
 }
+
+@media (max-width: 768px) {
+  .house-detail__modal {
+    padding: var(--spacing-xl) var(--spacing-lg);
+    width: 90%;
+    border-radius: var(--border-radius-md);
+  }
+
+  .house-detail__modal h2 {
+    font-size: var(--font-size-h2);
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .house-detail__modal p {
+    white-space: normal;
+    text-align: match-parent;
+  }
+
+  .house-detail__modal-buttons {
+    width: 100%;
+  }
+
+  .house-detail__modal-btn {
+    width: 100%;
+  }
+}
 </style>
