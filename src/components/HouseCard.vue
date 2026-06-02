@@ -193,4 +193,25 @@ defineEmits(['delete'])
   opacity: 0.9;
   cursor: pointer;
 }
+
+@media (max-width: 768px) {
+  .house-card {
+    width: 100%;
+  }
+
+  .house-card__image {
+    width: 100px;
+    height: 100px;
+    min-width: 100px;
+  }
+
+  .house-card__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .house-card__detail span {
+    white-space: nowrap;
+  }
+}
 </style>
