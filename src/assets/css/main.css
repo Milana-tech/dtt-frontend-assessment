@@ -147,6 +147,10 @@
 
   /* Large - images */
   --border-radius-lg: 16px;
+
+  --letter-spacing-btn: 1px;
+
+  --line-height-body: 1.6;
 }
 
 /* Global reset - removes default browser styles for
