@@ -16,22 +16,6 @@ export const useHousesStore = defineStore('houses', {
     error: null,
   }),
 
-  getters: {
-    /**
-     * Returns all houses sorted by price (ascending).
-     */
-    sortedByPrice: (state) => {
-      return [...state.houses].sort((a, b) => a.price - b.price)
-    },
-
-    /**
-     * Returns all houses sorted by size (ascending).
-     */
-    sortedBySize: (state) => {
-      return [...state.houses].sort((a, b) => a.size - b.size)
-    },
-  },
-
   actions: {
     /**
      * Fetches all houses from the DTT API and stores them in state.
@@ -117,7 +101,7 @@ export const useHousesStore = defineStore('houses', {
 
     /**
      * Creates a new house listing via the DTT API.
-     * @param {FormData} formData - The form data containing house details and image.
+     * @param {FormData} formData - The form data containing house details.
      * @returns {Object} The newly created house object.
      */
     async createHouse(formData) {

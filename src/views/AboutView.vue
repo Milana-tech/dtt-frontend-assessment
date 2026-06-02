@@ -113,7 +113,7 @@
   font-family: var(--font-secondary);
   font-size: var(--font-size-body);
   color: var(--color-text-secondary);
-  line-height: 1.6;
+  line-height: var(--line-height-body);
   padding-top: var(--spacing-lg);
 }
 

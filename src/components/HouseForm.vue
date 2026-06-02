@@ -462,7 +462,7 @@ function handleSubmit() {
 .house-form__image-upload {
   width: 120px;
   height: 120px;
-  margin-top: 15px;
+  margin-top: var(--spacing-md);
   border-radius: var(--border-radius-sm);
   border: 2px dashed var(--color-tertiary-dark);
   display: flex;
@@ -544,7 +544,7 @@ function handleSubmit() {
   font-weight: var(--font-weight-bold);
   cursor: pointer;
   width: 50%;
-  letter-spacing: 1px;
+  letter-spacing: var(--letter-spacing-btn);
   margin-top: var(--spacing-md);
   opacity: 0.5;
 }
@@ -565,11 +565,6 @@ function handleSubmit() {
 
   .house-form__row {
     flex-direction: column;
-  }
-
-  .house-form__submit {
-    width: 100%;
-    align-self: stretch;
   }
 
   .house-form__row:nth-child(2) {

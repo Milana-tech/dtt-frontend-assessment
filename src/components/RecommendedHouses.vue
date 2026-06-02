@@ -42,7 +42,7 @@
 <script setup>
 /**
  * RecommendedHouses component - displays a list of recommended house listings.
- * Used on the house detail page to show similar houses based on city.
+ * Used on the house detail page to show similar houses based on city and price range.
  */
 defineProps({
   // Array of recommended house objects to display

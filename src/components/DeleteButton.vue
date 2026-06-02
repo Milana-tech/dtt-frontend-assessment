@@ -49,7 +49,7 @@ defineEmits(['confirm', 'cancel'])
 .house-detail__modal {
   background-color: var(--color-background-2);
   border-radius: var(--border-radius-lg);
-  padding: 40px 100px;
+  padding: var(--spacing-xl) var(--spacing-xxl);
   max-width: 600px;
   width: 90%;
   text-align: center;

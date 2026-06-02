@@ -201,7 +201,7 @@ async function confirmDelete() {
   text-decoration: none;
   font-family: var(--font-primary);
   font-weight: var(--font-weight-bold);
-  letter-spacing: 1px;
+  letter-spacing: var(--letter-spacing-btn);
 }
 
 .houses-view__create-btn:hover {
@@ -343,12 +343,6 @@ async function confirmDelete() {
     display: none;
   }
 
-  .house-view__add-icon {
-    width: 24px;
-    height: 24px;
-    filter: brightness(0);
-  }
-
   .houses-view__header {
     justify-content: center;
     position: relative;
@@ -366,10 +360,6 @@ async function confirmDelete() {
     background: none;
     padding: 0;
     border-radius: 0;
-  }
-
-  .houses-view__create-btn span {
-    display: none;
   }
 
   .house-view__add-icon {
