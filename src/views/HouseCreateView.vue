@@ -69,4 +69,15 @@ async function handleSubmit({ formData, imageFile }) {
   margin-top: 45px;
   margin-bottom: var(--spacing-xl);
 }
+
+@media (max-width: 768px) {
+  .house-create {
+    background-image: none;
+    padding: clamp(80px, 10%, 100px) var(--spacing-md);
+  }
+
+  .house-create__title {
+    margin-top: var(--spacing-md);
+  }
+}
 </style>
