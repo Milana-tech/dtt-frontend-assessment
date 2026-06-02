@@ -4,21 +4,8 @@ A house listing web application.
 
 ## Screenshots
 
-### Houses Overview
-<img src="screenshots/houses-overview.png" alt="Houses overview">
+See [PREVIEW.md](PREVIEW.md) for all screenshots.
 
-### House Detail
-<img src="screenshots/house-detail.png" alt="House detail">
-
-### Create Listing
-<img src="screenshots/create-listing.png" alt="Create listing">
-
-### Mobile
-<p>
-  <img src="screenshots/mobile-houses.png" width="30%">
-  <img src="screenshots/mobile-detail.png" width="30%">
-  <img src="screenshots/mobile-create.png" width="30%">
-</p>
 ## Tech Stack
 
 - Vue 3
