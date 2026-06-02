@@ -78,4 +78,16 @@ onMounted(() => {
   margin-top: 45px;
   margin-bottom: var(--spacing-xl);
 }
+
+@media (max-width: 768px) {
+  .house-edit {
+    padding: clamp(60px, 10%, 80px) var(--spacing-md) 80px;
+    background: none;
+  }
+
+  .house-edit__title {
+    margin-top: var(--spacing-md);
+    font-size: var(--font-size-h2);
+  }
+}
 </style>
