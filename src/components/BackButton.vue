@@ -42,4 +42,10 @@ defineProps({
   width: 20px;
   height: 20px;
 }
+
+@media (max-width: 768px) {
+  .back-button {
+    margin-top: 0;
+  }
+}
 </style>
