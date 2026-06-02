@@ -4,12 +4,8 @@
     <div class="houses-view__header">
       <h1 class="houses-view__title">Houses</h1>
       <RouterLink to="/house/create" class="houses-view__create-btn">
-        <img
-          class="house-view__add-icon"
-          src="@/assets/icons/ic_plus_white@3x.png"
-          alt="Upload button"
-        />
-        CREATE NEW
+        <img class="house-view__add-icon" src="@/assets/icons/ic_plus_white@3x.png" alt="Create" />
+        <span class="houses-view__create-text">CREATE NEW</span>
       </RouterLink>
     </div>
 
@@ -332,5 +328,73 @@ async function confirmDelete() {
   width: 270px;
   height: auto;
   margin-bottom: var(--spacing-md);
+}
+
+.houses-view__create-text {
+  display: inline;
+}
+
+@media (max-width: 768px) {
+  .houses-view {
+    padding: clamp(60px, 10%, 80px) var(--spacing-md) 80px;
+  }
+
+  .houses-view__create-text {
+    display: none;
+  }
+
+  .house-view__add-icon {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0);
+  }
+
+  .houses-view__header {
+    justify-content: center;
+    position: relative;
+    margin-top: 0;
+  }
+
+  .houses-view__title {
+    text-align: center;
+    font-size: var(--font-size-h1-mobile);
+  }
+
+  .houses-view__create-btn {
+    position: absolute;
+    right: 0;
+    background: none;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .houses-view__create-btn span {
+    display: none;
+  }
+
+  .house-view__add-icon {
+    width: 24px;
+    height: 24px;
+    filter: invert(1) brightness(0);
+  }
+
+  .houses-view__controls {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .houses-view__search {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .houses-view__sort {
+    width: 100%;
+  }
+
+  .houses-view__sort-btn {
+    flex: 1;
+    padding: 10px 0;
+  }
 }
 </style>
