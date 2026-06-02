@@ -1,7 +1,9 @@
 <template>
   <div class="house-edit">
-    <BackButton :to="`/house/${route.params.id}`" label="Back to detail" />
-    <h1 class="house-edit__title">Edit listing</h1>
+    <div class="house-edit__header">
+      <BackButton :to="`/house/${route.params.id}`" label="Back to detail" />
+      <h1 class="house-edit__title">Edit listing</h1>
+    </div>
     <HouseForm :initial-values="store.selectedHouse" submit-label="SAVE" @submit="handleSubmit" />
   </div>
 </template>
@@ -79,15 +81,38 @@ onMounted(() => {
   margin-bottom: var(--spacing-xl);
 }
 
+.house-edit__header {
+  display: flex;
+  align-items: center;
+}
+
 @media (max-width: 768px) {
   .house-edit {
     padding: clamp(60px, 10%, 80px) var(--spacing-md) 80px;
     background: none;
   }
 
+  .house-edit__header {
+    justify-content: center;
+    position: relative;
+    margin-bottom: var(--spacing-xl);
+  }
+
   .house-edit__title {
-    margin-top: var(--spacing-md);
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
     font-size: var(--font-size-h2);
+  }
+
+  .house-edit :deep(.back-button) {
+    position: absolute;
+    left: 0;
+    margin: 0;
+  }
+
+  .house-edit :deep(.back-button) span {
+    display: none;
   }
 }
 </style>
